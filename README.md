@@ -11,11 +11,13 @@
 
 ##### 使用技术
 
-- 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf
+- 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf、Hutool
 - 前端：Vue2.0、ElementUI、Axios
 
 ##### 本地复现
 
-
+1. 创建数据库表
+2. 运行项目
+3. 访问localhost:8080体验
 
 By：tyza66(洮羱芝闇)
