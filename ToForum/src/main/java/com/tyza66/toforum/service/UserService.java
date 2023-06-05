@@ -22,7 +22,7 @@ public class UserService {
 
     //注册方法
     public boolean register(User user) {
-        user.setPassword(SecureUtil.md5(user.getPassword()));
+        user.setPassword(SecureUtil.sha1(user.getPassword()));
         user.setPower("2");
         user.setStatus("0");
         QueryWrapper<User> queryMapper = new QueryWrapper<>();
@@ -36,6 +36,22 @@ public class UserService {
             return true;
         }else {
             return false;
+        }
+    }
+
+    //登录方法
+    public User login(User user) {
+        user.setPassword(SecureUtil.sha1(user.getPassword()));
+        QueryWrapper<User> queryMapper = new QueryWrapper<>();
+        queryMapper.eq("username", user.getUsername());
+        queryMapper.eq("password", user.getPassword());
+        List<User> users = userMapper.selectList(queryMapper);
+        if (users.size() >= 1) {
+            User user1 = users.get(0);
+            user1.setPassword("");
+            return user1;
+        }else {
+            return null;
         }
     }
 }

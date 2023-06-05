@@ -5,7 +5,7 @@
 - SpringBoot全栈项目
 - 用户信息管理使用数据库为MySQL
 - 鉴权和角色管理使用Sa-Token
-- 存储在数据库中的用户密码使用MD5加密，而不是明文保存
+- 存储在数据库中的用户密码使用SHA-1加密，而不是明文保存
 - 论坛中的帖子使用MongoDB存储
 - 使用MyBatisPlus实现查询分页
 - 模板引擎使用Thymeleaf

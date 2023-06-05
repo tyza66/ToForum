@@ -1,5 +1,6 @@
 package com.tyza66.toforum.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -8,10 +9,7 @@ import com.tyza66.toforum.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author: tyza66
@@ -39,4 +37,49 @@ public class UserController {
         }
         return end;
     }
+
+    @ApiOperation("用户登录")
+    @PostMapping("/login")
+    public JSON login(@RequestBody User user) {
+        JSONObject end = JSONUtil.createObj();
+        User login = userService.login(user);
+        if (login!=null){
+            end.put("code",200);
+            end.put("msg","登录成功");
+            end.put("data",login);
+            StpUtil.login(login.getPower());
+        }else{
+            end.put("code",201);
+            end.put("msg","登录失败");
+        }
+        return end;
+    }
+
+    @ApiOperation("用户注销")
+    @GetMapping("/logoff")
+    public JSON logoff() {
+        JSONObject end = JSONUtil.createObj();
+        StpUtil.logout();
+        end.put("code",200);
+        end.put("msg","注销成功");
+        return end;
+    }
+
+    @ApiOperation("检查登录状态")
+    @GetMapping("/check")
+    public JSON check(){
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()){
+            end.put("code",200);
+            end.put("msg","已登录");
+            end.put("permissionList",StpUtil.getPermissionList());
+            end.put("roleList",StpUtil.getRoleList());
+            end.put("data",StpUtil.getLoginId());
+        }else{
+            end.put("code",201);
+            end.put("msg","未登录");
+        }
+        return end;
+    }
+
 }
