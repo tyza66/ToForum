@@ -8,18 +8,30 @@
     <script src="./js/vue.js"></script>
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
+    <!-- 引入ElementUI的样式文件 -->
+    <link rel="stylesheet" href="./css/elementui.css">
 </head>
 <body>
-    <div id="app">
-        
-    </div>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
+<div id="app">
+    <el-container>
+        <el-header>Header</el-header>
+        <el-main>Main</el-main>
+        <el-footer>Footer</el-footer>
+    </el-container>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            form: {
+                username: '',
+                password: ''
             }
-        })
-    </script>
+        },
+        methods: {
+
+        }
+    })
+</script>
 </body>
 </html>
