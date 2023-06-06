@@ -2,7 +2,7 @@ package com.tyza66.toforum.pojo;
 
 import lombok.Data;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Author: tyza66
@@ -18,7 +18,7 @@ public class Post {
     String mongo;
     String status;
     String owner;
-    Date last;
-    Date first;
+    Timestamp last;
+    Timestamp first;
     String tags;
 }

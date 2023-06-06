@@ -19,7 +19,7 @@ public class PostService {
     @Resource
     private PostMapper postMapper;
 
-    IPage<Post> getByPage(int page, int size) {
+    public IPage<Post> getByPage(int page, int size) {
         IPage<Post> postPage = postMapper.selectPage(new Page<>(page, size), null);
         return postPage;
     }
