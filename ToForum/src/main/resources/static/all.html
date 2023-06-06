@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吐坛</title>
+    <title>吐坛-帖子列表</title>
     <script src="./js/vue.js"></script>
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
-    <link rel="stylesheet" href="./css/elementui.css">
+    <link rel="stylesheet" href="./css/eindex.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            text-align: center;
+            line-height: 60px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
     <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+            <h2 class="title">吐坛</h2>
+        </el-header>
         <el-main>Main</el-main>
         <el-footer>Footer</el-footer>
     </el-container>
@@ -23,6 +38,15 @@
         el: '#app',
         data: {
 
+        },
+        created() {
+            axios.get("./user/check").then(function (response) {
+                if(response.data.code != 200){
+                    window.location.href = "../";
+                }
+            }).catch(function (error) {
+                console.log(error);
+            })
         },
         methods: {
 

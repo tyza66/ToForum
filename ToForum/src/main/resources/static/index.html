@@ -76,7 +76,7 @@
             </el-header>
             <el-main>
                 <el-container class="container">
-                    <h3>吐坛，吐槽论坛...</h3>
+                    <h3>登录吐坛，一起吐槽...</h3>
                     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
                         <el-form-item prop="username">
                             <p>账号</p>
@@ -84,7 +84,7 @@
                         </el-form-item>
                         <el-form-item prop="password">
                             <p class="p2">密码</p>
-                            <el-input v-model="form.password" placeholder="密码"></el-input>
+                            <el-input type="password" v-model="form.password" placeholder="密码"></el-input>
                         </el-form-item>
                     </el-form>
                     <el-button type="primary" @click="login('form')" style="margin-top: 20px;">登录</el-button>
