@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,37 +22,55 @@
             line-height: 60px;
             font-family: 'Courier New', Courier, monospace;
         }
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foot {
+            text-align: center;
+            display: inline-block;
+        }
     </style>
 </head>
+
 <body>
-<div id="app">
-    <el-container>
-        <el-header>
-            <h2 class="title">吐坛</h2>
-        </el-header>
-        <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
-    </el-container>
-</div>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
+    <div id="app">
+        <el-container>
+            <el-header>
+                <h2 class="title">吐坛</h2>
+            </el-header>
+            <el-main>
+                <el-container class="container"></el-container>
+            </el-main>
+            <el-footer class="footer">
+                <a class="foot" align="center" href="https://github.com/tyza66/ToForum">Github开源仓库</a>
+            </el-footer>
+        </el-container>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
 
-        },
-        created() {
-            axios.get("./user/check").then(function (response) {
-                if(response.data.code != 200){
-                    window.location.href = "../";
-                }
-            }).catch(function (error) {
-                console.log(error);
-            })
-        },
-        methods: {
+            },
+            created() {
+                axios.get("./user/check").then(function (response) {
+                    if (response.data.code != 200) {
+                        window.location.href = "../";
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            },
+            methods: {
 
-        }
-    })
-</script>
+            }
+        })
+    </script>
 </body>
+
 </html>
