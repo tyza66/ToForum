@@ -2,6 +2,7 @@ package com.tyza66.toforum.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tyza66.toforum.pojo.User;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Author: tyza66
@@ -10,4 +11,5 @@ import com.tyza66.toforum.pojo.User;
  **/
 
 public interface UserMapper extends BaseMapper<User> {
+
 }

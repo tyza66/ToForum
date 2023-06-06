@@ -95,11 +95,52 @@
             filter: blur(10px);
             transform: scale(0.9, 0.9);
         }
-        .container{
+
+        .container {
             justify-content: center;
             flex-direction: column;
             align-items: center;
         }
+
+        .userInfo {
+            height: 50px;
+        }
+
+        .hot,
+        .admin,
+        .new {
+            height: 200px;
+        }
+
+        .b-title{
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+            align-items: start;
+        }
+
+        .b-title .hot-icon {
+            width: 30px;
+            height: 30px;
+            margin-left: 15px;
+        }
+
+        .b-title .admin-icon {
+            width: 30px;
+            height: 30px;
+            margin-left: 15px;
+        }
+
+        .b-title .new-icon {
+            width: 30px;
+            height: 30px;
+            margin-left: 15px;
+        }
+
+        .b-title span{
+            line-height: 30px;
+        }
+
     </style>
 </head>
 
@@ -111,7 +152,44 @@
             </el-header>
             <el-main>
                 <el-container class="container">
-                    <div class="card"></div>
+                    <div class="card">
+                        <el-row>
+                            <el-col :span="24">
+                                <div class="userInfo"></div>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="8">
+                                <div class="hot">
+                                    <div class="b-title">
+                                        <svg t="1686034492338" class="hot-icon" viewBox="0 0 1024 1024" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" p-id="1470" width="200" height="200">
+                                            <path
+                                                d="M206.9 348.7c53.2-60.2 95.8-127.2 90.6-200.9-0.5-7.5-0.4-15-0.9-22.4-0.3-3.6 2.4-6.7 6.1-7 2.2-0.1 4.3-0.3 6.4-0.3 160.2 0 290.1 124 290.1 276.9 0 11.5-0.8 22.7-2.3 33.8-0.8 6.1 6.4 9.7 10.8 5.4 46.2-44.6 76.7-103.9 82.8-170.2 0.4-4.6 5.5-7.3 9.7-4.9 106.4 62.5 177.5 174.3 177.5 302.3 0 146.3-92.9 271.9-225.5 326-24 9.8-50.7 11.2-75.7 4-57.3-16.4-111.5-46.7-156.9-90.8-17-16.6-31.8-34.5-44.9-53.2-3-4.4-9.7-3.4-11.3 1.5-13.5 39.1-19.9 79.9-19.3 120.8 0.1 4.8-4.9 8-9.3 5.9-118.5-59.3-199.7-177.5-199.7-314.2 0-76.2 24.1-149.5 67-207.3"
+                                                fill="#F02D63" p-id="1471"></path>
+                                        </svg>
+                                        <span>热门话题</span>
+                                    </div>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="admin">
+                                    <div class="b-title">
+                                        <svg t="1686035059412" class="admin-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2758" width="200" height="200"><path d="M755.2 780.8L896 640l59.733333 59.733333-200.533333 200.533334-119.466667-119.466667 59.733334-59.733333 59.733333 59.733333zM597.333333 768v85.333333H256v-170.666666h4.266667l85.333333-85.333334h375.466667l85.333333 85.333334h-426.666667l-38.4 38.4V768h256z m213.333334-81.066667z m-85.333334-324.266666c0 106.666667-85.333333 192-192 192S341.333333 469.333333 341.333333 362.666667 426.666667 170.666667 533.333333 170.666667 725.333333 256 725.333333 362.666667z m-85.333333 0C640 302.933333 593.066667 256 533.333333 256S426.666667 302.933333 426.666667 362.666667s46.933333 106.666667 106.666666 106.666666S640 422.4 640 362.666667z" fill="#444444" p-id="2759"></path></svg>
+                                        <span>管理员帖</span>
+                                    </div>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="new">
+                                    <div class="b-title">
+                                        <svg t="1686035287173" class="new-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3142" width="200" height="200"><path d="M736 80a525.76 525.76 0 0 0-340.256 124.224l-4.48 3.776H128a16 16 0 0 0-16 16v512a16 16 0 0 0 16 16h768a16 16 0 0 0 16-16V224a16 16 0 0 0-16-16h-160v-128z" fill="#FFFFFF" p-id="3143"></path><path d="M208.224 624H496a256 256 0 0 1 240-255.52V80C444.384 80 208 316.384 208 608c0 5.344 0.064 10.688 0.224 16z" fill="#E3684E" p-id="3144"></path><path d="M289.12 640C288.384 629.44 288 618.752 288 608c0-247.424 200.576-448 448-448 5.344 0 10.688 0.096 16 0.288V384a240 240 0 0 0-239.488 256h-223.36z" fill="#FFCC64" p-id="3145"></path><path d="M353.312 640A389.12 389.12 0 0 1 352 608c0-212.064 171.936-384 384-384 5.344 0 10.688 0.096 16 0.32V384a240 240 0 0 0-239.488 256h-159.2z" fill="#FFE1A3" p-id="3146"></path><path d="M417.6 640a323.84 323.84 0 0 1-1.6-32c0-176.736 143.264-320 320-320 5.376 0 10.688 0.128 16 0.384V384a240 240 0 0 0-239.488 256H417.6z" fill="#FFF9ED" p-id="3147"></path><path d="M384 193.216a541.856 541.856 0 0 1 368-128.96V192H896a32 32 0 0 1 32 32v512a32 32 0 0 1-32 32H528.832l-0.928 128h161.728a16 16 0 1 1 0 32H336a16 16 0 1 1 0-32h159.904l0.896-128H128a32 32 0 0 1-32-32V224a32 32 0 0 1 32-32h256v1.216zM350.656 224H128v512h768V224h-144v160a240 240 0 0 0-239.488 256H192.96a542.272 542.272 0 0 1 157.76-416z m129.792 384a272.064 272.064 0 0 1 239.552-254.144v-257.6C444.64 104.704 224 330.56 224 608h256.448z" fill="#5D6D7E" p-id="3148"></path></svg>
+                                        <span>新的帖子</span>
+                                    </div>
+                                </div>
+                            </el-col>
+                        </el-row>
+                    </div>
                     <div class="cards">
                         <div class="card red">
                             <p class="tip">Hover Me</p>
@@ -129,7 +207,8 @@
                 </el-container>
             </el-main>
             <el-footer class="footer">
-                <a class="foot" align="center" href="https://tieba.baidu.com/f?kw=%CB%EF%D0%A6%B4%A8&fr=ala0&tpl=5&dyTabStr=MCw2LDEsNCw1LDMsMiw3LDgsOQ%3D%3D">直达孙吧</a>
+                <a class="foot" align="center"
+                    href="https://tieba.baidu.com/f?kw=%CB%EF%D0%A6%B4%A8&fr=ala0&tpl=5&dyTabStr=MCw2LDEsNCw1LDMsMiw3LDgsOQ%3D%3D">直达孙吧</a>
                 <a class="foot" align="center" href="https://github.com/tyza66/ToForum">Github开源仓库</a>
             </el-footer>
         </el-container>
