@@ -33,6 +33,72 @@
         .foot {
             text-align: center;
             display: inline-block;
+            margin-left: 5px;
+            margin-left: 5px;
+        }
+
+        .card {
+            width: 80%;
+            height: 254px;
+            background: rgb(236, 236, 236);
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .cards {
+            margin-top: 20px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cards .red {
+            background-color: #f43f5e;
+        }
+
+        .cards .blue {
+            background-color: #3b82f6;
+        }
+
+        .cards .green {
+            background-color: #22c55e;
+        }
+
+        .cards .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            height: 100px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 400ms;
+        }
+
+        .cards .card p.tip {
+            font-size: 1em;
+            font-weight: 700;
+        }
+
+        .cards .card p.second-text {
+            font-size: .7em;
+        }
+
+        .cards .card:hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        .cards:hover>.card:not(:hover) {
+            filter: blur(10px);
+            transform: scale(0.9, 0.9);
+        }
+        .container{
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -44,9 +110,26 @@
                 <h2 class="title">吐坛</h2>
             </el-header>
             <el-main>
-                <el-container class="container"></el-container>
+                <el-container class="container">
+                    <div class="card"></div>
+                    <div class="cards">
+                        <div class="card red">
+                            <p class="tip">Hover Me</p>
+                            <p class="second-text">Lorem Ipsum</p>
+                        </div>
+                        <div class="card blue">
+                            <p class="tip">Hover Me</p>
+                            <p class="second-text">Lorem Ipsum</p>
+                        </div>
+                        <div class="card green">
+                            <p class="tip">Hover Me</p>
+                            <p class="second-text">Lorem Ipsum</p>
+                        </div>
+                    </div>
+                </el-container>
             </el-main>
             <el-footer class="footer">
+                <a class="foot" align="center" href="https://tieba.baidu.com/f?kw=%CB%EF%D0%A6%B4%A8&fr=ala0&tpl=5&dyTabStr=MCw2LDEsNCw1LDMsMiw3LDgsOQ%3D%3D">直达孙吧</a>
                 <a class="foot" align="center" href="https://github.com/tyza66/ToForum">Github开源仓库</a>
             </el-footer>
         </el-container>
