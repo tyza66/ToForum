@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,29 +10,133 @@
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
     <!-- 引入ElementUI的样式文件 -->
-    <link rel="stylesheet" href="./css/elementui.css">
-</head>
-<body>
-<div id="app">
-    <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
-    </el-container>
-</div>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            form: {
-                username: '',
-                password: ''
-            }
-        },
-        methods: {
-
+    <link rel="stylesheet" href="./css/eindex.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    })
-</script>
+
+        .title {
+            text-align: center;
+            line-height: 60px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foot {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .container {
+            justify-content: center;
+            margin-top: 150px;
+            flex-direction: column;
+            width: 500px;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .container h3 {
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            font-size: 20px;
+            font-weight: 10;
+            line-height: 30px;
+        }
+
+        .p2 {
+            margin-top: 10px;
+        }
+        .el-form-item__content{
+            margin-left: 0px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header>
+                <h2 class="title">吐坛</h2>
+            </el-header>
+            <el-main>
+                <el-container class="container">
+                    <h3>吐坛，吐槽论坛...</h3>
+                    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+                        <el-form-item prop="username">
+                            <p>账号</p>
+                            <el-input v-model="form.username" placeholder="账号"></el-input>
+                        </el-form-item>
+                        <el-form-item prop="password">
+                            <p class="p2">密码</p>
+                            <el-input v-model="form.password" placeholder="密码"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <el-button type="primary" @click="login('form')" style="margin-top: 20px;">登录</el-button>
+                    <a href="./register.html" align="center" style="margin-top: 5px; font-size: 5px;">注册</a>
+                </el-container>
+            </el-main>
+            <el-footer class="footer">
+                <a class="foot" align="center" href="https://github.com/tyza66/ToForum">Github开源仓库</a>
+            </el-footer>
+        </el-container>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                var validatePassword = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请输入密码'));
+                    } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+                        callback(new Error('密码只能包含字母和数字'));
+                    } else {
+                        callback();
+                    }
+                };
+                return {
+                    form: {
+                        username: '',
+                        password: ''
+                    }, rules: {
+                        username: [
+                            { required: true, message: '请输入账号', trigger: 'blur' },
+                            { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+                        ],
+                        password: [
+                            { validator: validatePassword, trigger: 'blur' }
+                        ]
+                    }
+                }
+            },
+            methods: {
+                login(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            alert('提交成功');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                }
+            }
+        })
+    </script>
 </body>
+
 </html>
