@@ -11,12 +11,16 @@
 - 模板引擎使用Thymeleaf
 - 权限代码：0->超级管理员、1->普通管理员、2->普通用户
 - 发帖和回帖使用MarkDown
+- 超级管理员有权管理所有的帖子和回复，并且可以任免普通管理员，普通管理员有权管理所有的帖子和回复，普通用户只能管理自己的帖子和自己发出的回复
+- 将每个帖子的每个结构称为贴子体（PostStract），每个帖子由若干个帖子体组成，并且帖子结构使用MongoDB存储
+- 预留账号admin，密码admin，权限为超级管理员
+
 
 
 ##### 使用技术
 
 - 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf、Hutool
-- 前端：Vue2.0、ElementUI、Axios
+- 前端：Vue2.0、ElementUI、Axios、uiverse.io
 
 ##### 本地复现
 
