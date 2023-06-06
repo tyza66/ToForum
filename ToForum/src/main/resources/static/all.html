@@ -162,7 +162,7 @@
                     <div class="card">
                         <el-row>
                             <el-col :span="24">
-                                <div class="userInfo"></div>
+                                <div class="userInfo">{{"欢迎回来，"+user.username}}</div>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -223,12 +223,14 @@
                         </el-row>
                     </div>
                     <div class="cards">
-                        <div class="card" :class="(index+1)%3==0?'green':(index+1)%2==0?'red':'blue'" v-for="(item,index) in posts">
+                        <div class="card" :class="(index+1)%3==0?'green':(index+1)%2==0?'red':'blue'"
+                            v-for="(item,index) in posts">
                             <p class="tip">{{item.title}}</p>
                             <p class="second-text">{{item.tags}}</p>
                         </div>
                     </div>
-                    <el-input-number v-model="nowPage" @change="pageChange" :min="1" :max="allPage" label="描述文字" style="margin-top: 15px;"></el-input-number>
+                    <el-input-number v-model="nowPage" @change="pageChange" :min="1" :max="allPage" label="描述文字"
+                        style="margin-top: 15px;"></el-input-number>
                     <el-input-number class="pageController" v-model="nowPage" controls-position="right" size="mini"
                         @change="pageChange" :min="1" :max="allPage"></el-input-number>
                 </el-container>
@@ -244,6 +246,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                user: {},
                 posts: [],
                 nowPage: 1,
                 allPage: 1,
@@ -253,12 +256,14 @@
                 axios.get("./user/check").then(function (response) {
                     if (response.data.code != 200) {
                         window.location.href = "../";
+                    } else {
+                        that.user = response.data
                     }
                 }).catch(function (error) {
                     console.log(error);
                 })
                 axios.get("./post/getByPage?now=1&size=12").then(function (response) {
-                    if(response.data.code == 200) {
+                    if (response.data.code == 200) {
                         that.nowPage = 1
                         that.allPage = Math.floor(response.data.data.total / response.data.data.size) + 1
                         that.posts = response.data.data.records
@@ -270,14 +275,14 @@
             methods: {
                 pageChange(value) {
                     var that = this
-                    axios.get("./post/getByPage?now="+value+"&size=12").then(function (response) {
-                    if(response.data.code == 200) {
-                        that.allPage = Math.floor(response.data.data.total / response.data.data.size) + 1
-                        that.posts = response.data.data.records
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                })
+                    axios.get("./post/getByPage?now=" + value + "&size=12").then(function (response) {
+                        if (response.data.code == 200) {
+                            that.allPage = Math.floor(response.data.data.total / response.data.data.size) + 1
+                            that.posts = response.data.data.records
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
                 }
             }
         })

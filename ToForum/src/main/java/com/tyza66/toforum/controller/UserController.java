@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Author: tyza66
  * Date: 2023/6/5 16:53
@@ -40,7 +42,7 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public JSON login(@RequestBody User user) {
+    public JSON login(@RequestBody User user, HttpSession session) {
         JSONObject end = JSONUtil.createObj();
         User login = userService.login(user);
         if (login!=null){
@@ -48,6 +50,7 @@ public class UserController {
             end.put("msg","登录成功");
             end.put("data",login);
             StpUtil.login(login.getPower());
+            session.setAttribute("user",login);
         }else{
             end.put("code",201);
             end.put("msg","登录失败");
@@ -67,14 +70,15 @@ public class UserController {
 
     @ApiOperation("检查登录状态")
     @GetMapping("/check")
-    public JSON check(){
+    public JSON check(HttpSession session){
         JSONObject end = JSONUtil.createObj();
         if (StpUtil.isLogin()){
             end.put("code",200);
             end.put("msg","已登录");
             end.put("permissionList",StpUtil.getPermissionList());
             end.put("roleList",StpUtil.getRoleList());
-            end.put("data",StpUtil.getLoginId());
+            end.put("role",StpUtil.getLoginId());
+            end.put("username",((User)session.getAttribute("user")).getUsername());
         }else{
             end.put("code",201);
             end.put("msg","未登录");
