@@ -1,5 +1,6 @@
 package com.tyza66.toforum.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -31,11 +32,16 @@ public class PostController {
     @GetMapping("/getByPage")
     public JSON getSomeByPage(@RequestParam Integer now, @RequestParam Integer size) {
         JSONObject end = JSONUtil.createObj();
-        IPage<Post> page = postService.getByPage(now, size);
-        if (page != null) {
-            end.put("code", 200);
-            end.put("msg", "获取成功");
-            end.put("data", page);
+        if (StpUtil.isLogin()) {
+            IPage<Post> page = postService.getByPage(now, size);
+            if (page != null) {
+                end.put("code", 200);
+                end.put("msg", "获取成功");
+                end.put("data", page);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
         }
         return end;
     }
