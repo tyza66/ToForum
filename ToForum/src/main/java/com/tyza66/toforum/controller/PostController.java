@@ -6,14 +6,12 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tyza66.toforum.pojo.Post;
+import com.tyza66.toforum.pojo.PostStract;
 import com.tyza66.toforum.service.PostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author: tyza66
@@ -38,6 +36,26 @@ public class PostController {
                 end.put("code", 200);
                 end.put("msg", "获取成功");
                 end.put("data", page);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
+    @ApiOperation("帖子中插入信息")
+    @PostMapping("/insert")
+    public JSON insert(@RequestBody PostStract post) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            Boolean aBoolean = postService.savePost(post, post.getCollectionName());
+            if (aBoolean) {
+                end.put("code", 200);
+                end.put("msg", "插入成功");
+            } else {
+                end.put("code", 201);
+                end.put("msg", "插入失败");
             }
         } else {
             end.put("code", 201);
