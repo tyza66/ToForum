@@ -18,6 +18,9 @@
 <details><summary>Tag查询</summary>
 <img src="./效果/Tag查询.png"/>
 </details>
+<details><summary>发帖</summary>
+<img src="./效果/发帖.png"/>
+</details>
 
 ##### 说明
 - 现在是开源开发阶段
