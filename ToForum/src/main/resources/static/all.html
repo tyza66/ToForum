@@ -212,7 +212,7 @@
                                     <el-button class="bt" type="success">我要发贴</el-button>
                                     <el-button class="bt" type="primary">我要吐槽</el-button><br/>
                                     <el-button class="bt" type="warning">我要举报</el-button>
-                                    <el-button class="bt" type="danger">我要退出登录</el-button>
+                                    <el-button class="bt" type="danger" @click="out()">我要退出登录</el-button>
                                 </div>
                             </el-col>
                             <el-col :span="8">
@@ -313,6 +313,10 @@
                 },
                 go(item) {
                     window.location.href = "./post?id=" + item.id
+                },
+                out(){
+                    axios.get("./user/logoff")
+                    window.location.href = "../"
                 }
             }
         })

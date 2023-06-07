@@ -9,6 +9,9 @@
 <details><summary>首页</summary>
 <img src="./效果/首页.png"/>
 </details>
+<details><summary>首页鼠标悬停在帖子上</summary>
+<img src="./效果/鼠标悬停.png"/>
+</details>
 
 ##### 说明
 - 现在是开源开发阶段

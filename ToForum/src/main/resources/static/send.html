@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吐坛-帖子列表</title>
+    <script src="./js/vue.js"></script>
+    <script src="./js/eindex.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/eindex.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            text-align: center;
+            line-height: 60px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foot {
+            text-align: center;
+            display: inline-block;
+            margin-left: 5px;
+            margin-left: 5px;
+        }
+
+        .container {
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .userInfo {
+            height: 50px;
+            line-height: 50px;
+            text-indent: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header>
+                <h2 class="title">吐坛</h2>
+            </el-header>
+            <el-main>
+                <el-container class="container">
+                    
+                </el-container>
+            </el-main>
+            <el-footer class="footer">
+                <a class="foot" align="center"
+                    href="https://tieba.baidu.com/f?kw=%CB%EF%D0%A6%B4%A8&fr=ala0&tpl=5&dyTabStr=MCw2LDEsNCw1LDMsMiw3LDgsOQ%3D%3D">直达孙吧</a>
+                <a class="foot" align="center" href="https://github.com/tyza66/ToForum">Github开源仓库</a>
+            </el-footer>
+        </el-container>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+            created() {
+                var that = this
+                axios.get("./user/check").then(function (response) {
+                    if (response.data.code != 200) {
+                        window.location.href = "../";
+                    } else {
+                        that.user = response.data
+                        if (response.data.role == 0) {
+                            that.role = "超级管理员"
+                        } else if (response.data.role == 1) {
+                            that.role = "管理员"
+                        } else if (response.data.role == 2) {
+                            that.role = "普通用户"
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            },
+            methods: {
+                
+            }
+        })
+    </script>
+</body>
+
+</html>
