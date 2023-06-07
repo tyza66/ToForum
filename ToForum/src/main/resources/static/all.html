@@ -209,9 +209,9 @@
                             </el-col>
                             <el-col :span="8">
                                 <div class="hot">
-                                    <el-button class="bt" type="success">我要发贴</el-button>
-                                    <el-button class="bt" type="primary">我要吐槽</el-button><br/>
-                                    <el-button class="bt" type="warning">我要举报</el-button>
+                                    <el-button class="bt" type="success" @click="goSend()">我要发贴</el-button>
+                                    <el-button class="bt" type="primary" @click="goSend()">我要吐槽</el-button><br/>
+                                    <el-button class="bt" type="warning" @click="goSend()">我要举报</el-button>
                                     <el-button class="bt" type="danger" @click="out()">我要退出登录</el-button>
                                 </div>
                             </el-col>
@@ -220,13 +220,13 @@
                                     <div style="margin-top: 15px;width: 250px;">
                                         根据标题查询
                                         <el-input v-model="title" placeholder="请输入内容" class="input-with-select">
-                                            <el-button slot="append" icon="el-icon-search"></el-button>
+                                            <el-button slot="append" icon="el-icon-search" @click="searchByTitle()"></el-button>
                                         </el-input>
                                     </div>
                                     <div style="margin-top: 15px;width: 250px;">
                                         根据Tag查询
                                         <el-input v-model="tag" placeholder="请输入内容" class="input-with-select">
-                                            <el-button slot="append" icon="el-icon-search"></el-button>
+                                            <el-button slot="append" icon="el-icon-search" @click="searchByTage()"></el-button>
                                         </el-input>
                                     </div>
                                 </div>
@@ -323,6 +323,8 @@
 
                 },searchByTage(){
                     
+                },goSend(){
+                    window.location.href = "./send.html"
                 }
             }
         })
