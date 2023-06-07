@@ -263,7 +263,7 @@
                 nowPage: 1,
                 allPage: 1,
                 hot: [],
-                titile:"",
+                title:"",
                 tag:""
             },
             created() {
@@ -320,9 +320,9 @@
                     axios.get("./user/logoff")
                     window.location.href = "../"
                 },searchByTitle(){
-
+                    window.location.href = "./search.html?way=title&key="+this.title
                 },searchByTage(){
-                    
+                    window.location.href = "./search.html?way=tag&key="+this.tag
                 },goSend(){
                     window.location.href = "./send.html"
                 }

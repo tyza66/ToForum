@@ -12,6 +12,12 @@
 <details><summary>首页鼠标悬停在帖子上</summary>
 <img src="./效果/鼠标悬停.png"/>
 </details>
+<details><summary>标题查询</summary>
+<img src="./效果/标题查询.png"/>
+</details>
+<details><summary>Tag查询</summary>
+<img src="./效果/Tag查询.png"/>
+</details>
 
 ##### 说明
 - 现在是开源开发阶段

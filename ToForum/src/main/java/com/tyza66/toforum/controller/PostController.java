@@ -105,6 +105,28 @@ public class PostController {
         return end;
     }
 
+    @ApiOperation("按tag查询帖子")
+    @GetMapping("/getByTag")
+    public JSON getByTag(@RequestParam String tag) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            List<Post> posts = postService.getByTag(tag);
+            if (posts.size()!=0) {
+                end.put("code", 200);
+                end.put("msg", "获取成功");
+                end.put("data", posts);
+            }else{
+                end.put("code", 203);
+                end.put("msg", "没有信息");
+                end.put("data", posts);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
     @ApiOperation("帖子中插入帖子体")
     @PostMapping("/insert")
     public JSON insert(@RequestBody PostStract post) {
