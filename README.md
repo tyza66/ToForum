@@ -41,13 +41,14 @@
 - 主页有点浅丑，后续可以改进一下，先把各种功能罗列出来
 - 可以退出登录
 - 可以分别使用标题关键字和Tag关键字查询帖子
+- 发帖需要输入的三个框 一个是标题，一个是Tag，一个是MarkDown编辑器中编辑的帖子内容
 
 
 
 ##### 使用技术
 
 - 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf、Hutool
-- 前端：Vue2.0、ElementUI、Axios、uiverse.io、Editor.md
+- 前端：Vue2.0、ElementUI、Axios、uiverse.io、Editor.md、marked
 
 ##### 本地复现
 
