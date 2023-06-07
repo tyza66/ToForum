@@ -107,6 +107,7 @@
         .userInfo {
             height: 50px;
             line-height: 50px;
+            text-indent: 20px;
         }
 
         .hot,
@@ -149,6 +150,16 @@
             bottom: 0;
             right: 0;
         }
+
+        .b-item {
+            height: 30px;
+            line-height: 30px;
+            text-indent: 20px;
+        }
+
+        .bt{
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -163,36 +174,10 @@
                     <div class="card">
                         <el-row>
                             <el-col :span="24">
-                                <div class="userInfo">{{"欢迎回来，"+user.username}}</div>
+                                <div class="userInfo">{{"欢迎回来,"+role+user.username}}</div>
                             </el-col>
                         </el-row>
                         <el-row>
-                            <el-col :span="8">
-                                <div class="hot">
-                                    <div class="b-title">
-                                        <svg t="1686034492338" class="hot-icon" viewBox="0 0 1024 1024" version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg" p-id="1470" width="200" height="200">
-                                            <path
-                                                d="M206.9 348.7c53.2-60.2 95.8-127.2 90.6-200.9-0.5-7.5-0.4-15-0.9-22.4-0.3-3.6 2.4-6.7 6.1-7 2.2-0.1 4.3-0.3 6.4-0.3 160.2 0 290.1 124 290.1 276.9 0 11.5-0.8 22.7-2.3 33.8-0.8 6.1 6.4 9.7 10.8 5.4 46.2-44.6 76.7-103.9 82.8-170.2 0.4-4.6 5.5-7.3 9.7-4.9 106.4 62.5 177.5 174.3 177.5 302.3 0 146.3-92.9 271.9-225.5 326-24 9.8-50.7 11.2-75.7 4-57.3-16.4-111.5-46.7-156.9-90.8-17-16.6-31.8-34.5-44.9-53.2-3-4.4-9.7-3.4-11.3 1.5-13.5 39.1-19.9 79.9-19.3 120.8 0.1 4.8-4.9 8-9.3 5.9-118.5-59.3-199.7-177.5-199.7-314.2 0-76.2 24.1-149.5 67-207.3"
-                                                fill="#F02D63" p-id="1471"></path>
-                                        </svg>
-                                        <span>热门话题</span>
-                                    </div>
-                                </div>
-                            </el-col>
-                            <el-col :span="8">
-                                <div class="admin">
-                                    <div class="b-title">
-                                        <svg t="1686035059412" class="admin-icon" viewBox="0 0 1024 1024" version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg" p-id="2758" width="200" height="200">
-                                            <path
-                                                d="M755.2 780.8L896 640l59.733333 59.733333-200.533333 200.533334-119.466667-119.466667 59.733334-59.733333 59.733333 59.733333zM597.333333 768v85.333333H256v-170.666666h4.266667l85.333333-85.333334h375.466667l85.333333 85.333334h-426.666667l-38.4 38.4V768h256z m213.333334-81.066667z m-85.333334-324.266666c0 106.666667-85.333333 192-192 192S341.333333 469.333333 341.333333 362.666667 426.666667 170.666667 533.333333 170.666667 725.333333 256 725.333333 362.666667z m-85.333333 0C640 302.933333 593.066667 256 533.333333 256S426.666667 302.933333 426.666667 362.666667s46.933333 106.666667 106.666666 106.666666S640 422.4 640 362.666667z"
-                                                fill="#444444" p-id="2759"></path>
-                                        </svg>
-                                        <span>管理员帖</span>
-                                    </div>
-                                </div>
-                            </el-col>
                             <el-col :span="8">
                                 <div class="new">
                                     <div class="b-title">
@@ -217,14 +202,39 @@
                                                 d="M384 193.216a541.856 541.856 0 0 1 368-128.96V192H896a32 32 0 0 1 32 32v512a32 32 0 0 1-32 32H528.832l-0.928 128h161.728a16 16 0 1 1 0 32H336a16 16 0 1 1 0-32h159.904l0.896-128H128a32 32 0 0 1-32-32V224a32 32 0 0 1 32-32h256v1.216zM350.656 224H128v512h768V224h-144v160a240 240 0 0 0-239.488 256H192.96a542.272 542.272 0 0 1 157.76-416z m129.792 384a272.064 272.064 0 0 1 239.552-254.144v-257.6C444.64 104.704 224 330.56 224 608h256.448z"
                                                 fill="#5D6D7E" p-id="3148"></path>
                                         </svg>
-                                        <span>新的帖子</span>
+                                        <span>新帖子</span>
+                                    </div>
+                                    <div class="b-item" v-for="(item,index) in hot">{{item.title}}</div>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="hot">
+                                    <el-button class="bt" type="success">我要发贴</el-button>
+                                    <el-button class="bt" type="primary">我要吐槽</el-button><br/>
+                                    <el-button class="bt" type="warning">我要举报</el-button>
+                                    <el-button class="bt" type="danger">我要退出登录</el-button>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="hot">
+                                    <div style="margin-top: 15px;width: 250px;">
+                                        根据标题查询
+                                        <el-input placeholder="请输入内容" class="input-with-select">
+                                            <el-button slot="append" icon="el-icon-search"></el-button>
+                                        </el-input>
+                                    </div>
+                                    <div style="margin-top: 15px;width: 250px;">
+                                        根据Tag查询
+                                        <el-input placeholder="请输入内容" class="input-with-select">
+                                            <el-button slot="append" icon="el-icon-search"></el-button>
+                                        </el-input>
                                     </div>
                                 </div>
                             </el-col>
                         </el-row>
                     </div>
                     <div class="cards">
-                        <div class="card" :class="(index+1)%3==0?'green':(index+1)%2==0?'red':'blue'"
+                        <div @click="go(item)" class="card" :class="(index+1)%3==0?'green':(index+1)%2==0?'red':'blue'"
                             v-for="(item,index) in posts">
                             <p class="tip">{{item.title}}</p>
                             <p class="second-text">{{item.tags}}</p>
@@ -248,9 +258,11 @@
             el: '#app',
             data: {
                 user: {},
+                role: "普通用户",
                 posts: [],
                 nowPage: 1,
                 allPage: 1,
+                hot: []
             },
             created() {
                 var that = this
@@ -259,6 +271,13 @@
                         window.location.href = "../";
                     } else {
                         that.user = response.data
+                        if (response.data.role == 0) {
+                            that.role = "超级管理员"
+                        } else if (response.data.role == 1) {
+                            that.role = "管理员"
+                        } else if (response.data.role == 2) {
+                            that.role = "普通用户"
+                        }
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -268,6 +287,13 @@
                         that.nowPage = 1
                         that.allPage = Math.floor(response.data.data.total / response.data.data.size) + 1
                         that.posts = response.data.data.records
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+                axios.get("./post/getNowByPage?now=1&size=5").then(function (response) {
+                    if (response.data.code == 200) {
+                        that.hot = response.data.data.records
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -284,6 +310,9 @@
                     }).catch(function (error) {
                         console.log(error);
                     })
+                },
+                go(item) {
+                    window.location.href = "./post?id=" + item.id
                 }
             }
         })

@@ -44,7 +44,43 @@ public class PostController {
         return end;
     }
 
-    @ApiOperation("帖子中插入信息")
+    @ApiOperation("按页数获取热门帖子")
+    @GetMapping("/getNowByPage")
+    public JSON getSomeHotByPage(@RequestParam Integer now, @RequestParam Integer size) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            IPage<Post> page = postService.getNewByPage(now, size);
+            if (page != null) {
+                end.put("code", 200);
+                end.put("msg", "获取成功");
+                end.put("data", page);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
+    @ApiOperation("按页数获取管理员帖子")
+    @GetMapping("/getAdminByPage")
+    public JSON getSomeAdminByPage(@RequestParam Integer now, @RequestParam Integer size) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            IPage<Post> page = postService.getAdminByPage(now, size);
+            if (page != null) {
+                end.put("code", 200);
+                end.put("msg", "获取成功");
+                end.put("data", page);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
+    @ApiOperation("帖子中插入帖子体")
     @PostMapping("/insert")
     public JSON insert(@RequestBody PostStract post) {
         JSONObject end = JSONUtil.createObj();
