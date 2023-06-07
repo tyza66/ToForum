@@ -219,13 +219,13 @@
                                 <div class="hot">
                                     <div style="margin-top: 15px;width: 250px;">
                                         根据标题查询
-                                        <el-input placeholder="请输入内容" class="input-with-select">
+                                        <el-input v-model="title" placeholder="请输入内容" class="input-with-select">
                                             <el-button slot="append" icon="el-icon-search"></el-button>
                                         </el-input>
                                     </div>
                                     <div style="margin-top: 15px;width: 250px;">
                                         根据Tag查询
-                                        <el-input placeholder="请输入内容" class="input-with-select">
+                                        <el-input v-model="tag" placeholder="请输入内容" class="input-with-select">
                                             <el-button slot="append" icon="el-icon-search"></el-button>
                                         </el-input>
                                     </div>
@@ -262,7 +262,9 @@
                 posts: [],
                 nowPage: 1,
                 allPage: 1,
-                hot: []
+                hot: [],
+                titile:"",
+                tag:""
             },
             created() {
                 var that = this
@@ -317,6 +319,10 @@
                 out(){
                     axios.get("./user/logoff")
                     window.location.href = "../"
+                },searchByTitle(){
+
+                },searchByTage(){
+                    
                 }
             }
         })
