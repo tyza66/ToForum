@@ -9,6 +9,9 @@
     <script src="./js/vue.js"></script>
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/editormd.min.js"></script>
+    <link rel="stylesheet" href="./css/editormd.css">
     <link rel="stylesheet" href="./css/eindex.css">
     <style>
         * {
@@ -59,7 +62,13 @@
             </el-header>
             <el-main>
                 <el-container class="container">
-                    
+                    标题:<el-input placeholder=""></el-input>
+                    Tags:<el-input placeholder=""></el-input>
+                    <div id="editormd">
+                        <textarea style="display:none;">
+                            Hello
+                        </textarea>
+                    </div>
                 </el-container>
             </el-main>
             <el-footer class="footer">
@@ -73,29 +82,26 @@
         var app = new Vue({
             el: '#app',
             data: {
-                
+                testEditor: null
             },
             created() {
                 var that = this
                 axios.get("./user/check").then(function (response) {
                     if (response.data.code != 200) {
                         window.location.href = "../";
-                    } else {
-                        that.user = response.data
-                        if (response.data.role == 0) {
-                            that.role = "超级管理员"
-                        } else if (response.data.role == 1) {
-                            that.role = "管理员"
-                        } else if (response.data.role == 2) {
-                            that.role = "普通用户"
-                        }
                     }
                 }).catch(function (error) {
                     console.log(error);
                 })
+                this.testEditor = editormd({
+                    id      : "editormd",
+                    width   : "90%",
+                    height  : 640,
+                    path    : "../lib/"
+                });
             },
             methods: {
-                
+
             }
         })
     </script>

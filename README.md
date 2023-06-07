@@ -44,7 +44,7 @@
 ##### 使用技术
 
 - 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf、Hutool
-- 前端：Vue2.0、ElementUI、Axios、uiverse.io
+- 前端：Vue2.0、ElementUI、Axios、uiverse.io、Editor.md
 
 ##### 本地复现
 
