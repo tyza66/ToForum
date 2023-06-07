@@ -90,4 +90,20 @@ public class PostService {
         }
     }
 
+    //根据标题查询帖子
+    public List<Post> getByTitle(String title) {
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("title", title);
+        List<Post> posts = postMapper.selectList(queryWrapper);
+        return posts;
+    }
+
+    //根据tag查询帖子
+    public List<Post> getByTag(String tag) {
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("tags", tag);
+        List<Post> posts = postMapper.selectList(queryWrapper);
+        return posts;
+    }
+
 }

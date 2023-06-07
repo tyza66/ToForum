@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Author: tyza66
  * Date: 2023/6/6 15:35
@@ -72,6 +74,29 @@ public class PostController {
                 end.put("code", 200);
                 end.put("msg", "获取成功");
                 end.put("data", page);
+            }
+        } else {
+            end.put("code", 201);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
+    //根据标题查询帖子
+    @ApiOperation("根据标题查询帖子")
+    @GetMapping("/getByTitle")
+    public JSON getByTitle(@RequestParam String title) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            List<Post> posts = postService.getByTitle(title);
+            if (posts.size()!=0) {
+                end.put("code", 200);
+                end.put("msg", "获取成功");
+                end.put("data", posts);
+            }else{
+                end.put("code", 203);
+                end.put("msg", "没有信息");
+                end.put("data", posts);
             }
         } else {
             end.put("code", 201);

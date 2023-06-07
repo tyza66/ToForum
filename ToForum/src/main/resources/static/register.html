@@ -86,13 +86,14 @@
                         <p class="p2">密码</p>
                         <el-input type="password" v-model="form.password" placeholder="密码"></el-input>
                     </el-form-item>
-                    <el-form-item prop="password">
+                    <el-form-item prop="qr">
                         <p class="p2">验证码</p>
                         <el-input type="text" v-model="form.qr" placeholder="验证码"></el-input>
+                        <img :src="qr" style="display:inline-bolck;margin-top: 10px;" @click="newQr()"/>
                     </el-form-item>
                 </el-form>
-                <el-button type="primary" @click="login('form')" style="margin-top: 20px;">登录</el-button>
-                <a href="./register.html" align="center" style="margin-top: 15px; font-size: 5px;">注册</a>
+                <el-button type="primary" @click="signin('form')" style="margin-top: 20px;">注册</el-button>
+                <a href="./index.html" align="center" style="margin-top: 15px; font-size: 5px;">登录</a>
             </el-container>
         </el-main>
         <el-footer class="footer">
@@ -125,31 +126,41 @@
                     ],
                     password: [
                         { validator: validatePassword, trigger: 'blur' }
+                    ],
+                    qr: [
+                        { required: true, message: '请输入验证码', trigger: 'blur' },
+                        { min: 4, max: 4, message: '长度为 4 个字符', trigger: 'blur' }
                     ]
-                }
+                },
+                qr:"./user/qr"
             }
         },
         methods: {
-            login(formName) {
+            signin(formName) {
                 var that = this
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        axios.post("./user/login", {
+                        axios.post("./user/register?code="+that.form.qr, {
                             "username": this.form.username,
                             "password": this.form.username
                         }).then(function (response) {
                             if (response.data.code == "200") {
                                 that.$notify({
-                                    title: '登录成功',
+                                    title: '注册成功',
                                     message: '账号密码正确',
                                     type: 'success'
                                 });
-                                window.location.href = "./all.html";
+                                window.location.href = "./index.html";
                             }
                             else if (response.data.code == "201") {
                                 that.$notify.info({
-                                    title: '登陆失败',
-                                    message: '账号或密码输入错误'
+                                    title: '注册失败',
+                                    message: '账号已存在'
+                                });
+                            }else if (response.data.code == "202") {
+                                that.$notify.info({
+                                    title: '注册失败',
+                                    message: '验证码错误'
                                 });
                             }
                         }).catch(function (error) {
@@ -164,6 +175,9 @@
                         return false;
                     }
                 });
+            },
+            newQr(){
+                this.qr = "./user/qr?t="+new Date().getTime()
             }
         }
     })
