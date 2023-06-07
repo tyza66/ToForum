@@ -64,14 +64,13 @@
             </el-header>
             <el-main>
                 <el-container class="container">
-                    标题:<el-input placeholder="发布帖子的标题"></el-input>
-                    Tags:<el-input placeholder="发布帖子的主题(可以使用#隔开多个)"></el-input>
+                    标题:<el-input v-model="form.title" placeholder="发布帖子的标题"></el-input>
+                    Tags:<el-input v-model="form.tags" placeholder="发布帖子的主题(可以使用#隔开多个)"></el-input>
                     正文:
                     <div id="editormd">
-                        <textarea style="display:none;">
-                            在这里编辑你的帖子正文
-                        </textarea>
+                        <textarea v-model="form.main" style="display:none;"></textarea>
                     </div>
+
                 </el-container>
             </el-main>
             <el-footer class="footer">
@@ -93,6 +92,11 @@
         var app = new Vue({
             el: '#app',
             data: {
+                form:{
+                    title:"",
+                    tags:"",
+                    main:"#                              在这里编辑你的帖子正文"
+                }
             },
             created() {
                 var that = this
