@@ -1,5 +1,12 @@
 # ToForum
 ### 吐坛，吐槽专用论坛
+<details><summary>登录界面</summary>
+<img src="./效果/登录.png"/>
+</details>
+<details><summary>注册界面</summary>
+<img src="./效果/注册.png"/>
+</details>
+
 ##### 说明
 - 现在是开源开发阶段
 - SpringBoot全栈项目
