@@ -10,8 +10,8 @@
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
     <script src="./js/jquery.min.js"></script>
-    <script src="./js/editormd.min.js"></script>
     <link rel="stylesheet" href="./css/editormd.css">
+    <script src="./js/editormd.min.js"></script>
     <link rel="stylesheet" href="./css/eindex.css">
     <style>
         * {
@@ -41,9 +41,11 @@
         }
 
         .container {
+            width: 90%;
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            margin: 0 auto;
         }
 
         .userInfo {
@@ -58,15 +60,16 @@
     <div id="app">
         <el-container>
             <el-header>
-                <h2 class="title">吐坛</h2>
+                <h2 class="title">发帖</h2>
             </el-header>
             <el-main>
                 <el-container class="container">
-                    标题:<el-input placeholder=""></el-input>
-                    Tags:<el-input placeholder=""></el-input>
+                    标题:<el-input placeholder="发布帖子的标题"></el-input>
+                    Tags:<el-input placeholder="发布帖子的主题(可以使用#隔开多个)"></el-input>
+                    正文:
                     <div id="editormd">
                         <textarea style="display:none;">
-                            Hello
+                            在这里编辑你的帖子正文
                         </textarea>
                     </div>
                 </el-container>
@@ -79,10 +82,17 @@
         </el-container>
     </div>
     <script>
+        $(function(){
+            this.testEditor = editormd({
+                    id      : "editormd",
+                    width   : "100%",
+                    height  : 640,
+                    path    : "../lib/"
+                });
+        })
         var app = new Vue({
             el: '#app',
             data: {
-                testEditor: null
             },
             created() {
                 var that = this
@@ -93,12 +103,6 @@
                 }).catch(function (error) {
                     console.log(error);
                 })
-                this.testEditor = editormd({
-                    id      : "editormd",
-                    width   : "90%",
-                    height  : 640,
-                    path    : "../lib/"
-                });
             },
             methods: {
 
