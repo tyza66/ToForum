@@ -110,6 +110,7 @@
             },
             methods: {
                 send() {
+                    console.log($(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n"))
                     var that = this
                     axios.post("./post/insertNew", {
                         "description": $(".editormd-markdown-textarea").text(),

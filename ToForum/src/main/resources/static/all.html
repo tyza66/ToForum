@@ -314,7 +314,7 @@
                     })
                 },
                 go(item) {
-                    window.location.href = "./post?id=" + item.id
+                    window.location.href = "./post?id=" + item.id +"&num=12"
                 },
                 out(){
                     axios.get("./user/logoff")
