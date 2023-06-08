@@ -168,6 +168,7 @@ public class PostController {
             postStract.setTitle(post.getTitle());
             postStract.setOwner(post.getOwner());
             postStract.setIn(post.getDescription());
+            post.setDescription("");
             Boolean aBoolean = postService.send(post, postStract);
             if (aBoolean) {
                 end.put("code", 200);
