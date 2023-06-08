@@ -70,7 +70,7 @@
                     <div id="editormd">
                         <textarea v-model="form.main" style="display:none;"></textarea>
                     </div>
-                    <el-button type="success">发送帖子</el-button>
+                    <el-button @cilck="send()" type="success">发送帖子</el-button>
                 </el-container>
             </el-main>
             <el-footer class="footer">
@@ -81,21 +81,21 @@
         </el-container>
     </div>
     <script>
-        $(function(){
+        $(function () {
             this.testEditor = editormd({
-                    id      : "editormd",
-                    width   : "100%",
-                    height  : 640,
-                    path    : "../lib/"
-                });
+                id: "editormd",
+                width: "100%",
+                height: 640,
+                path: "../lib/"
+            });
         })
         var app = new Vue({
             el: '#app',
             data: {
-                form:{
-                    title:"",
-                    tags:"",
-                    main:"#                              在这里编辑你的帖子正文"
+                form: {
+                    title: "",
+                    tags: "",
+                    main: "#                              在这里编辑你的帖子正文"
                 }
             },
             created() {
@@ -109,7 +109,13 @@
                 })
             },
             methods: {
-
+                send() {
+                    axios.post("./post/insertNew", {
+                        "description": this.form.main,
+                        "tags": this.form.tags,
+                        "title": this.form.title
+                    })
+                }
             }
         })
     </script>
