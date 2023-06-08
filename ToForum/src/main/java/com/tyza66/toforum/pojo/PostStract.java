@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 /**
  * Author: tyza66
  * Date: 2023/6/6 19:27
@@ -18,8 +20,8 @@ public class PostStract {
     String description;
     String status;
     String owner;
-    String last;
-    String first;
+    Timestamp last;
+    Timestamp first;
     String tags;
     String in;
     String collectionName;

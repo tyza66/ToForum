@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 @Data
 public class Post {
-    Integer id;
+    String id;
     String title;
     String description;
     String mongo;
