@@ -70,7 +70,7 @@
                     <div id="editormd">
                         <textarea v-model="form.main" style="display:none;"></textarea>
                     </div>
-                    <el-button @cilck="send()" type="success">发送帖子</el-button>
+                    <el-button @click="send()" type="success">发送帖子</el-button>
                 </el-container>
             </el-main>
             <el-footer class="footer">
@@ -110,10 +110,33 @@
             },
             methods: {
                 send() {
+                    var that = this
                     axios.post("./post/insertNew", {
                         "description": this.form.main,
                         "tags": this.form.tags,
                         "title": this.form.title
+                    }).then(function(response){
+                        if(response.data.code == "200"){
+                            that.$notify({
+                                        title: '发送成功',
+                                        message: '正在跳转到帖子界面',
+                                        type: 'success'
+                                    });
+                        }else if(response.data.code=="202"){
+                            that.$notify.info({
+                                        title: '发送失败',
+                                        message: '您尚未登陆'
+                                    });
+                            window.location.href = "./index.html"
+                        }else if(response.data.code=="201"){
+                            that.$notify.info({
+                                        title: '发送失败',
+                                        message: '请检查您填入的帖子信息'
+                                    });
+                        }
+                    }
+                    ).catch(function (error) {
+                        console.log(error);
                     })
                 }
             }

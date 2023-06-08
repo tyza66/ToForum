@@ -177,7 +177,7 @@ public class PostController {
                 end.put("msg", "发布失败");
             }
         } else {
-            end.put("code", 201);
+            end.put("code", 202);
             end.put("msg", "未登录");
         }
         return end;
