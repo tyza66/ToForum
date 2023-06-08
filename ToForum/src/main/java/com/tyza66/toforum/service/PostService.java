@@ -9,9 +9,11 @@ import com.tyza66.toforum.pojo.PostStract;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -126,6 +128,21 @@ public class PostService {
         Criteria criteria = Criteria.where("id").is(id);
         PostStract postStract = mongoTemplate.findOne(Query.query(criteria), PostStract.class,collectionName);
         return postStract;
+    }
+
+    //根据id获取帖子体
+    public PostStract getPostStractById(String collectionName, String id) {
+        Criteria criteria = Criteria.where("_id").is(id);
+        PostStract postStract = mongoTemplate.findOne(Query.query(criteria), PostStract.class,collectionName);
+        return postStract;
+    }
+
+    //按id编辑帖子体
+    public Boolean editPostStractById(String collectionName, String id, PostStract postStract) {
+        Criteria criteria = Criteria.where("_id").is(id);
+        Update update = new Update().set("in", postStract.getIn()).set("last",new Timestamp(System.currentTimeMillis()).toString());
+        mongoTemplate.updateFirst(Query.query(criteria), update, collectionName);
+        return true;
     }
 
 }
