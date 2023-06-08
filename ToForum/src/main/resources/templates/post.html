@@ -194,6 +194,15 @@
                 }).catch(function (error) {
                     console.log(error);
                 })
+            },
+            edit(evenet){
+                var that = this
+                var parent = evenet.target.parentNode
+                var pid = parent.getAttribute("pid")
+                if (pid==null||pid==undefined){
+                    pid = parent.children[0].getAttribute("pid")
+                }
+                window.location.href = "./edit?collection=post"+this.GetQueryString("id")+"&id="+pid
             }
         }
     })

@@ -232,4 +232,28 @@ public class PostController {
         return end;
     }
 
+    @ApiOperation("根据集合名和帖子id还有帖子体修改帖子")
+    @PostMapping("/updatePost")
+    public JSON updatePost(@RequestBody PostStract postStract, @RequestParam String id, HttpSession session) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            Boolean aBoolean = false;
+            //只有帖子体的所有者或者超级管理员才能修改
+            if (postService.selectPostStractById(postStract.getCollectionName(), id).getOwner().equals(((User) session.getAttribute("user")).getUsername()) || ((User) session.getAttribute("user")).getPower().equals("0")) {
+                aBoolean = postService.editPostStractById(postStract.getCollectionName(), id, postStract);
+            }
+            if (aBoolean) {
+                end.put("code", 200);
+                end.put("msg", "修改成功");
+            } else {
+                end.put("code", 201);
+                end.put("msg", "修改失败");
+            }
+        } else {
+            end.put("code", 202);
+            end.put("msg", "未登录");
+        }
+        return end;
+
+    }
 }

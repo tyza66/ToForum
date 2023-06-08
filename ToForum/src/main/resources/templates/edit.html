@@ -84,8 +84,9 @@
         <el-main>
             <el-container class="container">
                 <div id="editormd">
-                    <textarea v-model="call" style="display:none;"></textarea>
+                    <textarea style="display:none;" th:text="${in}"></textarea>
                 </div>
+                <el-button type="success" @click="edit()">提交修改</el-button>
             </el-container>
         </el-main>
         <el-footer class="footer">
@@ -106,9 +107,7 @@
     })
     var app = new Vue({
         el: '#app',
-        data: {
-            call: "# 请在此处输入回复内容",
-        },
+        data: {},
         created() {
             var that = this
             axios.get("./user/check").then(function (response) {
@@ -129,6 +128,20 @@
                 reg = null;
                 r = null;
                 return context == null || context == "" || context == "undefined" ? "" : context;
+            }, edit() {
+                var that = this
+                axios.post("./post/updatePost?id=" + this.GetQueryString("id"), {
+                    "collectionName": this.GetQueryString("collection"),
+                    "in": $(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n")
+                }).then(function (response) {
+                    if (response.data.code == 200) {
+                        window.location.replace(document.referrer)
+                    } else {
+                        alert(response.data.msg)
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
             }
         }
     })

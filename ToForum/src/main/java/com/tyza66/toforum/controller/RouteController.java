@@ -33,8 +33,9 @@ public class RouteController {
     }
 
     @GetMapping("/edit")
-    public String edit() {
-        
+    public String edit(@RequestParam String collection,@RequestParam String id,Model model) {
+        PostStract postStractById = postService.getPostStractById(collection, id);
+        model.addAttribute("in", postStractById.getIn().replaceAll("\\\\n", "\n\n"));
         return "edit";
     }
 
