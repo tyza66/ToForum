@@ -172,7 +172,7 @@ public class PostController {
             if (aBoolean) {
                 end.put("code", 200);
                 end.put("msg", "发布成功");
-                end.put("id",post.getMongo());
+                end.put("id", post.getMongo());
             } else {
                 end.put("code", 201);
                 end.put("msg", "发布失败");
@@ -193,13 +193,37 @@ public class PostController {
             reply.setOwner(((User) session.getAttribute("user")).getUsername());
             reply.setFirst(new Timestamp(System.currentTimeMillis()).toString());
             reply.setLast(new Timestamp(System.currentTimeMillis()).toString());
-            Boolean aBoolean = postService.reply(reply,reply.getCollectionName());
+            Boolean aBoolean = postService.reply(reply, reply.getCollectionName());
             if (aBoolean) {
                 end.put("code", 200);
                 end.put("msg", "回复成功");
             } else {
                 end.put("code", 201);
                 end.put("msg", "回复失败");
+            }
+        } else {
+            end.put("code", 202);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
+    @ApiOperation("根据id删除评论")
+    @GetMapping("/deleteReply")
+    public JSON deleteReply(@RequestParam String id, @RequestParam String collectionName, HttpSession session) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            Boolean aBoolean = false;
+            //只有帖子体的所有者或者超级管理员才能删除
+            if (postService.selectPostStractById(collectionName, id).getOwner().equals(((User) session.getAttribute("user")).getUsername()) || ((User) session.getAttribute("user")).getPower().equals("0")) {
+                aBoolean = postService.deletePostStractById(collectionName, id);
+            }
+            if (aBoolean) {
+                end.put("code", 200);
+                end.put("msg", "删除成功");
+            } else {
+                end.put("code", 201);
+                end.put("msg", "删除失败");
             }
         } else {
             end.put("code", 202);

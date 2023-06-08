@@ -20,9 +20,11 @@ public class SaConfig implements StpInterface {
         switch ((String) loginId) {
             case "0":
                 list.add("super-admin");
+                list.add("all");
                 break;
             case "1":
                 list.add("admin");
+                list.add("user");
                 break;
             case "2":
                 list.add("user");
@@ -44,9 +46,12 @@ public class SaConfig implements StpInterface {
         switch ((String) loginId) {
             case "0":
                 list.add("super-admin");
+                list.add("admin");
+                list.add("user");
                 break;
             case "1":
                 list.add("admin");
+                list.add("user");
                 break;
             case "2":
                 list.add("user");

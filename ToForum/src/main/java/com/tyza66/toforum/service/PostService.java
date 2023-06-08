@@ -7,6 +7,8 @@ import com.tyza66.toforum.mapper.PostMapper;
 import com.tyza66.toforum.pojo.Post;
 import com.tyza66.toforum.pojo.PostStract;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -114,8 +116,16 @@ public class PostService {
 
     //根据id删除帖子体
     public Boolean deletePostStractById(String collectionName, String id) {
-        mongoTemplate.remove(new QueryWrapper<PostStract>().eq("id", id), collectionName);
+        Criteria criteria = Criteria.where("_id").is(id);
+        mongoTemplate.remove(Query.query(criteria), collectionName);
         return true;
+    }
+
+    //按id查询帖子体
+    public PostStract selectPostStractById(String collectionName, String id) {
+        Criteria criteria = Criteria.where("id").is(id);
+        PostStract postStract = mongoTemplate.findOne(Query.query(criteria), PostStract.class,collectionName);
+        return postStract;
     }
 
 }
