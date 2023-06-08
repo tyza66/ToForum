@@ -1,5 +1,6 @@
 package com.tyza66.toforum.controller;
 
+import com.tyza66.toforum.pojo.PostStract;
 import com.tyza66.toforum.service.PostService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * Author: tyza66
@@ -22,8 +25,10 @@ public class RouteController {
 
     @GetMapping("/post")
     public String post(@RequestParam String id,@RequestParam String num, Model model) {
-
-        model.addAttribute("title", "kkk");
+        List<PostStract> postStracts = postService.selectPostStract("post" + id);
+        model.addAttribute("title", postStracts.get(0).getTitle());
+        model.addAttribute("tags",postStracts.get(0).getTags());
+        model.addAttribute("postStracts",postStracts);
         return "post";
     }
 

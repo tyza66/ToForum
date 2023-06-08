@@ -162,8 +162,8 @@ public class PostController {
             post.setLast(new Timestamp(System.currentTimeMillis()));
             post.setMongo("post" + post.getId());
             PostStract postStract = new PostStract();
-            postStract.setLast(post.getLast());
-            postStract.setFirst(post.getFirst());
+            postStract.setLast(post.getLast().toString());
+            postStract.setFirst(post.getFirst().toString());
             postStract.setTags(post.getTags());
             postStract.setTitle(post.getTitle());
             postStract.setOwner(post.getOwner());

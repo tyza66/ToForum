@@ -20,8 +20,8 @@ public class PostStract {
     String description;
     String status;
     String owner;
-    Timestamp last;
-    Timestamp first;
+    String last;
+    String first;
     String tags;
     String in;
     String collectionName;
