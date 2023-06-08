@@ -11,7 +11,7 @@
  Target Server Version : 80033
  File Encoding         : 65001
 
- Date: 07/06/2023 19:19:32
+ Date: 08/06/2023 17:27:12
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `mongo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -37,17 +37,9 @@ CREATE TABLE `post`  (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES (1, '家人们谁懂啊', '', 'post1', '2', 'tyza66', '2023-06-06 00:00:00', '2023-06-06 00:00:00', '#绝 #搞笑');
-INSERT INTO `post` VALUES (2, '竟然有这种人', '', 'post2', '2', 'tyza66', '2023-06-06 00:00:00', '2023-06-06 00:00:00', '#绝 #社会现象');
-INSERT INTO `post` VALUES (3, '这根本就是形式主义', '', 'post3', '2', 'tyza66', '2023-06-06 00:00:00', '2023-06-06 00:00:00', '#绝 #社会现象');
-INSERT INTO `post` VALUES (4, '完了完了 堵死了 上班已经迟到', '', 'post4', '2', 'tyza66', '2023-06-06 00:00:00', '2023-06-06 00:00:00', '#绝 #交通');
-INSERT INTO `post` VALUES (5, '这种现象绝了', NULL, 'post5', '2', 'tyza66', '2023-06-06 17:13:42', '2023-06-06 17:13:35', '#惊了');
-INSERT INTO `post` VALUES (6, '怎么理解懂的都懂', NULL, 'post6', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
-INSERT INTO `post` VALUES (7, '怎么理解6', NULL, 'post7', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
-INSERT INTO `post` VALUES (8, '怎么理解96', NULL, 'post8', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
-INSERT INTO `post` VALUES (9, '怎么理解好玩', NULL, 'post9', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
-INSERT INTO `post` VALUES (10, '怎么理解666', NULL, 'post10', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
-INSERT INTO `post` VALUES (11, '怎么理解xx', NULL, 'post11', '2', 'tyza66', '2023-06-06 17:15:09', '2023-06-06 17:15:12', '#6');
+INSERT INTO `post` VALUES ('048852e784244d409cba0687cf89955c', 'giao', '#                              在这里编辑你的帖子正文', 'post048852e784244d409cba0687cf89955c', NULL, 'tyza66', '2023-06-08 09:09:00', '2023-06-08 09:09:00', 'giaogiao');
+INSERT INTO `post` VALUES ('c428f773f9e84877a749c3fcf5287c34', '家人们家人们', '#                              在这里编辑你的帖子正文', 'postc428f773f9e84877a749c3fcf5287c34', NULL, 'tyza66', '2023-06-08 08:49:15', '2023-06-08 08:49:15', '家人们');
+INSERT INTO `post` VALUES ('fc7de87740d546e780449c0557c89d7f', '666', '#                              在这里编辑你的帖子正文', 'postfc7de87740d546e780449c0557c89d7f', NULL, 'tyza66', '2023-06-08 08:49:44', '2023-06-08 08:49:44', '666');
 
 -- ----------------------------
 -- Table structure for user
@@ -65,6 +57,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES (-1723842559, 'xxx', 'b60d121b438a380c343d5ec3c2037564b82ffef3', 0, '2');
 INSERT INTO `user` VALUES (-910073854, 'tyza661', 'a03a7be3c4c7bbab242638969f735c2fef61b4a5', 0, '2');
 INSERT INTO `user` VALUES (9, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 0, '0');
 INSERT INTO `user` VALUES (10, 'tyza66', '7132f04074c4b8955383155cda268c45850b56cc', 0, '0');
