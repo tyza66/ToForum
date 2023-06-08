@@ -8,7 +8,11 @@
     <script src="./js/vue.js"></script>
     <script src="./js/eindex.js"></script>
     <script src="./js/axios.min.js"></script>
+    <script src="./js/marked.min.js"></script>
     <link rel="stylesheet" href="./css/eindex.css">
+    <script src="./js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/editormd.css">
+    <script src="./js/editormd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -49,6 +53,25 @@
             line-height: 50px;
             text-indent: 20px;
         }
+
+        .tags {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .one {
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .owner {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .time {
+            border-top: 1px solid #ccc;
+        }
     </style>
 </head>
 
@@ -59,10 +82,19 @@
             <h2 class="title" th:text="${title}">标题</h2>
         </el-header>
         <el-main>
+            <h5 class="tags" th:text="${tags}"></h5>
             <el-container class="container">
-                <div th:each="item:${postStracts}">
-                    <div th:text="${item}"></div>
+                <div class="one" th:each="item:${postStracts}">
+                    <div class="owner" th:text="${item.getOwner()}"></div>
+                    <div class="in" th:text="${item.getIn()}"></div>
+                    <div class="time" th:text="${item.last}"></div>
+                    <div> <el-button type="warning" plain size="small">编辑</el-button>
+                        <el-button type="danger" plain size="small">删除</el-button></div>
                 </div>
+                <div id="editormd">
+                    <textarea v-model="call" style="display:none;"></textarea>
+                </div>
+                <el-button @click="send()" type="success">发送回复</el-button>
             </el-container>
         </el-main>
         <el-footer class="footer">
@@ -73,10 +105,22 @@
     </el-container>
 </div>
 <script>
+    $(function () {
+        testEditor = editormd({
+            id: "editormd",
+            width: "100%",
+            height: 640,
+            path: "../lib/"
+        });
+        $(".in").each(function () {
+            console.log(this.innerText)
+            this.innerHTML = marked.parse(" " + this.innerText.replaceAll("\\n", "\n\n")).replaceAll("\\n", "<br\>");
+        });
+    })
     var app = new Vue({
         el: '#app',
         data: {
-
+            call: "# 请在此处输入回复内容",
         },
         created() {
             var that = this
@@ -89,7 +133,44 @@
             })
         },
         methods: {
-
+            send() {
+                var that = this
+                axios.post("./post/reply", {
+                    "collectionName": "post" + this.GetQueryString("id"),
+                    "in": $(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n")
+                }).then(function (response) {
+                    if(response.data.code == "200"){
+                        that.$notify({
+                            title: '发送成功',
+                            message: '你的回复很有价值',
+                            type: 'success'
+                        });
+                        window.location.reload();
+                    }else if(response.data.code=="202"){
+                        that.$notify.info({
+                            title: '发送失败',
+                            message: '您尚未登陆'
+                        });
+                        window.location.href = "./index.html"
+                    }else if(response.data.code=="201"){
+                        that.$notify.info({
+                            title: '发送失败',
+                            message: '请检查您填入的帖子信息'
+                        });
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            },GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+                var context = "";
+                if (r != null)
+                    context = decodeURIComponent(r[2]);
+                reg = null;
+                r = null;
+                return context == null || context == "" || context == "undefined" ? "" : context;
+            }
         }
     })
 </script>

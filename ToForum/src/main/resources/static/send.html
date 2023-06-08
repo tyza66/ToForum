@@ -110,10 +110,9 @@
             },
             methods: {
                 send() {
-                    console.log($(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n"))
                     var that = this
                     axios.post("./post/insertNew", {
-                        "description": $(".editormd-markdown-textarea").text(),
+                        "description": $(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n"),
                         "tags": this.form.tags,
                         "title": this.form.title
                     }).then(function(response){
@@ -123,6 +122,7 @@
                                         message: '正在跳转到帖子界面',
                                         type: 'success'
                                     });
+                            window.location.href = "./post?id=" + response.data.id +"&num=12"
                         }else if(response.data.code=="202"){
                             that.$notify.info({
                                         title: '发送失败',

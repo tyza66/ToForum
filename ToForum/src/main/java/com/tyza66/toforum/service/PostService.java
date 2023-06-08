@@ -106,4 +106,16 @@ public class PostService {
         return posts;
     }
 
+    //回复帖子
+    public Boolean reply(PostStract postStract, String collectionName) {
+        mongoTemplate.save(postStract, collectionName);
+        return true;
+    }
+
+    //根据id删除帖子体
+    public Boolean deletePostStractById(String collectionName, String id) {
+        mongoTemplate.remove(new QueryWrapper<PostStract>().eq("id", id), collectionName);
+        return true;
+    }
+
 }

@@ -183,4 +183,29 @@ public class PostController {
         }
         return end;
     }
+
+    @ApiOperation("回复帖子")
+    @PostMapping("/reply")
+    public JSON reply(@RequestBody PostStract reply, HttpSession session) {
+        JSONObject end = JSONUtil.createObj();
+        if (StpUtil.isLogin()) {
+            reply.setId(IdUtil.simpleUUID());
+            reply.setOwner(((User) session.getAttribute("user")).getUsername());
+            reply.setFirst(new Timestamp(System.currentTimeMillis()).toString());
+            reply.setLast(new Timestamp(System.currentTimeMillis()).toString());
+            Boolean aBoolean = postService.reply(reply,reply.getCollectionName());
+            if (aBoolean) {
+                end.put("code", 200);
+                end.put("msg", "回复成功");
+            } else {
+                end.put("code", 201);
+                end.put("msg", "回复失败");
+            }
+        } else {
+            end.put("code", 202);
+            end.put("msg", "未登录");
+        }
+        return end;
+    }
+
 }
