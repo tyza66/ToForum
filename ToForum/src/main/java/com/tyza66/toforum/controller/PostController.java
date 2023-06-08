@@ -172,7 +172,7 @@ public class PostController {
             if (aBoolean) {
                 end.put("code", 200);
                 end.put("msg", "发布成功");
-                end.put("id", post.getMongo());
+                end.put("id", post.getId());
             } else {
                 end.put("code", 201);
                 end.put("msg", "发布失败");
@@ -216,7 +216,13 @@ public class PostController {
             Boolean aBoolean = false;
             //只有帖子体的所有者或者超级管理员才能删除
             if (postService.selectPostStractById(collectionName, id).getOwner().equals(((User) session.getAttribute("user")).getUsername()) || ((User) session.getAttribute("user")).getPower().equals("0")) {
-                aBoolean = postService.deletePostStractById(collectionName, id);
+                //System.out.println(postService.selectPostStractById(collectionName, id).getTitle());
+                if(postService.selectPostStractById(collectionName, id).getTitle()!=null){
+                    aBoolean = postService.deleteById(collectionName.replace("post",""));
+                    end.put("dd","1");
+                }else {
+                    aBoolean = postService.deletePostStractById(collectionName, id);
+                }
             }
             if (aBoolean) {
                 end.put("code", 200);

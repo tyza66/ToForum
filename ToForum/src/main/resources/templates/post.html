@@ -88,8 +88,13 @@
                     <div class="owner" th:text="${item.getOwner()}"></div>
                     <div class="in" th:text="${item.getIn()}"></div>
                     <div class="time" th:text="${item.last}"></div>
-                    <div> <el-button type="warning" plain size="small" th:pid="${item.getId()}" @click="edit($event)">编辑</el-button>
-                        <el-button type="danger" plain size="small" th:pid="${item.getId()}" @click="del($event)">删除</el-button></div>
+                    <div>
+                        <el-button type="warning" plain size="small" th:pid="${item.getId()}" @click="edit($event)">
+                            编辑
+                        </el-button>
+                        <el-button type="danger" plain size="small" th:pid="${item.getId()}" @click="del($event)">删除
+                        </el-button>
+                    </div>
                 </div>
                 <div id="editormd">
                     <textarea v-model="call" style="display:none;"></textarea>
@@ -138,20 +143,20 @@
                     "collectionName": "post" + this.GetQueryString("id"),
                     "in": $(".editormd-markdown-textarea").text().replace(/(\n)/g, "\\n")
                 }).then(function (response) {
-                    if(response.data.code == "200"){
+                    if (response.data.code == "200") {
                         that.$notify({
                             title: '发送成功',
                             message: '你的回复很有价值',
                             type: 'success'
                         });
                         window.location.reload();
-                    }else if(response.data.code=="202"){
+                    } else if (response.data.code == "202") {
                         that.$notify.info({
                             title: '发送失败',
                             message: '您尚未登陆'
                         });
                         window.location.href = "./index.html"
-                    }else if(response.data.code=="201"){
+                    } else if (response.data.code == "201") {
                         that.$notify.info({
                             title: '发送失败',
                             message: '请检查您填入的帖子信息'
@@ -160,7 +165,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 })
-            },GetQueryString(name) {
+            }, GetQueryString(name) {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
                 var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
                 var context = "";
@@ -169,23 +174,27 @@
                 reg = null;
                 r = null;
                 return context == null || context == "" || context == "undefined" ? "" : context;
-            },del(evenet){
+            }, del(evenet) {
                 var that = this
                 var parent = evenet.target.parentNode
                 var pid = parent.getAttribute("pid")
-                if (pid==null||pid==undefined){
+                if (pid == null || pid == undefined) {
                     pid = parent.children[1].getAttribute("pid")
                 }
-                axios.get("./post/deleteReply?collectionName=post"+this.GetQueryString("id")+"&id="+pid).then(function (response) {
-                    if(response.data.code == "200"){
-                        window.location.reload();
-                    }else if(response.data.code=="202"){
+                axios.get("./post/deleteReply?collectionName=post" + this.GetQueryString("id") + "&id=" + pid).then(function (response) {
+                    if (response.data.code == "200") {
+                        if (response.data.dd == "1") {
+                            window.location.href = "./all.html"
+                        } else {
+                            window.location.reload();
+                        }
+                    } else if (response.data.code == "202") {
                         that.$notify.info({
                             title: '删除失败',
                             message: '您尚未登陆'
                         });
                         window.location.href = "./index.html"
-                    }else if(response.data.code=="201"){
+                    } else if (response.data.code == "201") {
                         that.$notify.info({
                             title: '删除失败',
                             message: '只能删除自己发布的帖子或回复'
@@ -195,14 +204,14 @@
                     console.log(error);
                 })
             },
-            edit(evenet){
+            edit(evenet) {
                 var that = this
                 var parent = evenet.target.parentNode
                 var pid = parent.getAttribute("pid")
-                if (pid==null||pid==undefined){
+                if (pid == null || pid == undefined) {
                     pid = parent.children[0].getAttribute("pid")
                 }
-                window.location.href = "./edit?collection=post"+this.GetQueryString("id")+"&id="+pid
+                window.location.href = "./edit?collection=post" + this.GetQueryString("id") + "&id=" + pid
             }
         }
     })

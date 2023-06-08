@@ -84,7 +84,7 @@ public class PostService {
     }
 
     //根据id删除帖子
-    public Boolean deleteById(int id) {
+    public Boolean deleteById(String id) {
         int i = postMapper.deleteById(id);
         mongoTemplate.dropCollection("post" + id);
         if (i >= 1) {
