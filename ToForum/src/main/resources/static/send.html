@@ -112,7 +112,7 @@
                 send() {
                     var that = this
                     axios.post("./post/insertNew", {
-                        "description": this.form.main,
+                        "description": $(".editormd-markdown-textarea").text(),
                         "tags": this.form.tags,
                         "title": this.form.title
                     }).then(function(response){

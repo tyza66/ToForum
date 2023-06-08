@@ -172,6 +172,7 @@ public class PostController {
             if (aBoolean) {
                 end.put("code", 200);
                 end.put("msg", "发布成功");
+                end.put("id",post.getMongo());
             } else {
                 end.put("code", 201);
                 end.put("msg", "发布失败");
