@@ -32,4 +32,10 @@ public class RouteController {
         return "post";
     }
 
+    @GetMapping("/edit")
+    public String edit() {
+        
+        return "edit";
+    }
+
 }
