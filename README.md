@@ -67,6 +67,9 @@
 - 后端：Spring、Spring Boot、MyBatis、MyBatis Plus、Knife4j、Spring-Boot-Data-MongoDB、Thymeleaf、Hutool
 - 前端：Vue2.0、ElementUI、Axios、uiverse.io、Editor.md、marked
 
+##### 不足
+- 在帖子列表总页码的计算方式中有一点问题，没有考虑到总页数/页码能被整除的情况，导致一旦能被整除的时候就会多出来一个空页。
+
 ##### 本地复现
 
 1. 创建数据库表
